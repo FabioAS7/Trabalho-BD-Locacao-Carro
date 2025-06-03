@@ -3,6 +3,7 @@ package lab.bd.trabalho.locacaocarro.model;
 import java.time.LocalDate;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,6 +20,7 @@ import lombok.ToString;
 @Table(name = "locatario")
 public class Locatario {
 	
+	@Id
 	@Column(name = "cpf", length = 11, nullable = false)
 	private String cpf;
 	

@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+/*Estilo da parte*/
+.tabela_de_entrada_de_dados{
+}
+
+
+/*Estilo da tabela de pesquisa de carros*/
+.tabela_de_pesquisa_carro{
+    border-collapse: collapse;
+    width: 100%;
+}
+.tabela_de_pesquisa_carro td,
+.tabela_de_pesquisa_carro th{
+    border: 1px solid black;
+    padding: 8px;
+}
+.cabecalho_carro{
+    background-color: beige;
+}
