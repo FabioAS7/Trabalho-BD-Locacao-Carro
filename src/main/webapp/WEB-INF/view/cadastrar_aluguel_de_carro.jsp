@@ -32,7 +32,7 @@
             <table>
                 <tr>
                     <td><Label for="carro_placa">Placa do Carro:</Label></td>
-                    <td><input type="text" id="carro_placa" name="carro_placa" required></td>
+                    <td><input type="text" id="carro_placa" name="carro_placa" ></td>
                     <td><button type="submit" name="botao" value="Pesquisar">Pesquisar</button></td>
                 </tr>
 
@@ -42,12 +42,12 @@
 
                 <tr>
                     <td><Label for="data_retirada">Dia de retirada:</Label></td>
-                    <td><input type="date" id="data_retirada" name="data_retirada" required></td>
+                    <td><input type="date" id="data_retirada" name="data_retirada" ></td>
                 </tr>
 
                 <tr>
                     <td><Label for="data_devolucao">Dia de devolução:</Label></td>
-                    <td><input type="date" id="data_devolucao" name="data_devolucao" required></td>
+                    <td><input type="date" id="data_devolucao" name="data_devolucao" ></td>
                 </tr>
             </table>
         </form>
