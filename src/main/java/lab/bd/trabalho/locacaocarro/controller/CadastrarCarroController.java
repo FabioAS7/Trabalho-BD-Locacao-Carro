@@ -33,7 +33,6 @@ public class CadastrarCarroController {
 		String saida = "";
 		String erro = "";
 		Carro carro = new Carro();
-		List<Carro> carros = new ArrayList<Carro>();
 		List<Categoria> categorias = new ArrayList<Categoria>();
 
 		// Adiciona categorias para o DropBox no .JSP
@@ -43,23 +42,26 @@ public class CadastrarCarroController {
 		} catch (Exception e) {
 			erro = e.getMessage();
 		}
+		
+		if (params.get("id") != null && !params.get("id").isEmpty()) {
+			placa = params.get("id");
+		}
+		
 
 		// Controle dos botoes excluir e editar
 		try {
-			
-			if (placa != null && acao != null && acao.equals("editar")) {
-				carro = carroR.getReferenceById(placa);
-				carros = null;
-				model.addAttribute("carros", carros);
-			}
+			if (params.get("id") != null && !params.get("id").isEmpty()) {
+				
+				if (acao.equals("editar")) {
+					carro = carroR.getReferenceById(placa);
 
-			if (acao.equals("excluir")) {
-				carroR.delete(carro);
-				carros = carroR.findAll();
-				carro = null;
-				saida = "Carro removido da frota com sucesso";
+				} else if (acao.equals("excluir")) {
+					carro = carroR.getReferenceById(placa);
+					carroR.deleteById(placa);
+					saida = "Carro (" + carro.getPlaca() + ") removido da frota com sucesso";
+					carro = null;
+				}
 			}
-			
 		} catch (Exception e) {
 			erro = e.getMessage();
 		}
@@ -72,7 +74,7 @@ public class CadastrarCarroController {
 
 	@RequestMapping(name = "cadastrar_carro", value = "/cadastrar_carro", method = RequestMethod.POST)
 	public ModelAndView CadastrarCarroPost(@RequestParam Map<String, String> params, ModelMap model) {
-		String placa = params.get("placa");
+		String placa = params.get("placa").toUpperCase();
 		String marca = params.get("marca");
 		String modelo = params.get("modelo");
 		String cor = params.get("cor");
@@ -103,7 +105,7 @@ public class CadastrarCarroController {
 			if (cmd.equalsIgnoreCase("Listar")) {
 				carros = carroR.findAll();
 			} else if (cmd.equalsIgnoreCase("PesquisarPlaca")) { // Botoes de pesuisa indiviuais
-				carros = (List<Carro>) carroR.findByPlaca(placa);
+				//
 			} else if (cmd.equalsIgnoreCase("PesquisarMarca")) {
 				carros = carroR.findByMarca(marca);
 			} else if (cmd.equalsIgnoreCase("PesquisarModelo")) {
@@ -137,7 +139,14 @@ public class CadastrarCarroController {
 				Categoria c = categoriaR.findById(Integer.parseInt(categoria)).orElse(null);
 				carro.setCategoria(c);
 				carroR.save(carro);
-				saida = "Carro adicionado a frota com sucesso";
+				
+				if(carroR.findById(placa).isPresent()) {
+					saida = "Carro (" + placa + ") atualizado com sucesso";
+				} else {
+					saida = "Carro adicionado a frota com sucesso";
+				}
+				
+
 			}
 
 			// Botao "Remover"

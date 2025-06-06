@@ -8,7 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Carros</title>
 
+    <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/footer.css">
 </head>
 <body>
 
@@ -22,13 +24,16 @@
     </header>
 
     <main>
+        
         <form action="cadastrar_carro" method="post">
-            <h1>Cadastro de Carros</h1>
+            <h1>Controle de Carros</h1>
             <table class="tabela_de_entrada_de_dados">
                 <tr>
                     <td><Label for="placa">Placa do Carro:</Label></td>
-                    <td><input type="text" id="placa" name="placa" value='<c:out value="${carro.placa}"/>'></td>
-                    <td><button type="submit" maxlength="8" name="botao" value="PesquisarPlaca">Pesquisar</button></td> <!-- PesquisarPlaca -->
+
+                    <td><input type="text" maxlength="8" id="placa" name="placa" value='<c:out value="${carro.placa}"/>'></td>
+                    
+                    <td><button type="submit" name="botao" value="PesquisarPlaca">Pesquisar</button></td> <!-- PesquisarPlaca -->
                 </tr>
 
                 <tr>
@@ -58,16 +63,16 @@
                 <tr>
                     <td><Label for="tipo_combustivel">Tipo de Combustivel:</Label></td>
                     <td>
-                        <select name="tipo_combustivel" id="tipo_combustivel">
-                            <option value="" selected disabled>Selecione o combustível</option>
-                            <option value="Gasolina">Gasolina</option>
-                            <option value="Etanol">Etanol</option>
-                            <option value="Diesel">Diesel</option>
-                            <option value="GNV">GNV (Gás Natural Veicular)</option>
-                            <option value="Híbrido">Híbrido</option>
-                            <option value="Flex">Flex</option>
-                            <option value="Hidrogênio">Hidrogênio </option>
-                        </select>
+						<select name="tipo_combustivel" id="tipo_combustivel">
+						    <option value="" disabled <c:if test="${empty carro.tipoCombustivel}">selected</c:if>>Selecione o combustível</option>
+						    <option value="Gasolina" <c:if test="${carro.tipoCombustivel == 'Gasolina'}">selected</c:if>>Gasolina</option>
+						    <option value="Etanol" <c:if test="${carro.tipoCombustivel == 'Etanol'}">selected</c:if>>Etanol</option>
+						    <option value="Diesel" <c:if test="${carro.tipoCombustivel == 'Diesel'}">selected</c:if>>Diesel</option>
+						    <option value="GNV" <c:if test="${carro.tipoCombustivel == 'GNV'}">selected</c:if>>GNV (Gás Natural Veicular)</option>
+						    <option value="Híbrido" <c:if test="${carro.tipoCombustivel == 'Híbrido'}">selected</c:if>>Híbrido</option>
+						    <option value="Flex" <c:if test="${carro.tipoCombustivel == 'Flex'}">selected</c:if>>Flex</option>
+						    <option value="Hidrogênio" <c:if test="${carro.tipoCombustivel == 'Hidrogênio'}">selected</c:if>>Hidrogênio</option>
+						</select>
                     </td>
                     <td><button type="submit" name="botao" value="PesquisarTipoDeCombustivel">Pesquisar</button></td> <!-- PesquisarTipoDeCombustivel -->
                 </tr>
@@ -87,19 +92,12 @@
                     <td>
                         <select name="tipo_cambio" id="tipo_cambio" >
                             <option value="" disabled <c:if test="${empty carro.tipoCambio}">selected</c:if>>Selecione o câmbio</option>
-
                             <option value="Manual" <c:if test="${carro.tipoCambio == 'Manual'}">selected</c:if>>Manual</option>
-
                             <option value="Automatizado (embreagem simples)" <c:if test="${carro.tipoCambio == 'Automatizado (embreagem simples)'}">selected</c:if>>Automatizado (embreagem simples)</option>
-
                             <option value="Automatizado (embreagem dupla)" <c:if test="${carro.tipoCambio == 'Automatizado (embreagem dupla)'}">selected</c:if>>Automatizado (embreagem dupla)</option>
-
                             <option value="Automatico (hidraulico)" <c:if test="${carro.tipoCambio == 'Automatico (hidraulico)'}">selected</c:if>>Automático (hidráulico)</option>
-
                             <option value="CVT" <c:if test="${carro.tipoCambio == 'CVT'}">selected</c:if>>CVT</option>
-
                             <option value="Sequencial" <c:if test="${carro.tipoCambio == 'Sequencial'}">selected</c:if>>Sequencial</option>
-
                             <option value="Eletrico (sem cambio convencional)" <c:if test="${carro.tipoCambio == 'Eletrico (sem cambio convencional)'}">selected</c:if>>Elétrico (sem câmbio convencional)</option>
                         </select>
                     </td>
@@ -108,19 +106,20 @@
                 
                 <tr>
                     <td><label for="status_disponivel">Status do carro:</label></td>
-                    <td>
-                        <input type="radio" id="status_disponivel" name="status_carro" value="Disponivel" <c:if test="${carro.statusCarro == 'Disponivel'}">checked</c:if>>
-                        <label for="status_disponivel">Disponível</label>
-
-                        <input type="radio" id="status_alugado" name="status_carro" value="Alugado" <c:if test="${carro.statusCarro == 'Alugado'}">checked</c:if>>
-                        <label for="status_alugado">Alugado</label>
-
-                        <input type="radio" id="status_reparo" name="status_carro" value="Em Reparo" <c:if test="${carro.statusCarro == 'Em Reparo'}">checked</c:if>>
-                        <label for="status_reparo">Em Reparo</label>
-
-                        <input type="radio" id="status_inativo" name="status_carro" value="Inativo" <c:if test="${carro.statusCarro == 'Inativo'}">checked</c:if>>
-                        <label for="status_inativo">Inativo / Fora de Frota</label>
-                    </td>
+					<td>
+					    <input type="radio" id="status_disponivel" name="status_carro" value="Disponivel"
+					           <c:if test="${carro.statusCarro == 'Disponivel'}">checked</c:if>>
+					    <label for="status_disponivel">Disponível</label>
+					    <input type="radio" id="status_alugado" name="status_carro" value="Alugado"
+					           <c:if test="${carro.statusCarro == 'Alugado'}">checked</c:if>>
+					    <label for="status_alugado">Alugado</label>
+					    <input type="radio" id="status_reparo" name="status_carro" value="Em Reparo"
+					           <c:if test="${carro.statusCarro == 'Em Reparo'}">checked</c:if>>
+					    <label for="status_reparo">Em Reparo</label>
+					    <input type="radio" id="status_inativo" name="status_carro" value="Inativo"
+					           <c:if test="${carro.statusCarro == 'Inativo'}">checked</c:if>>
+					    <label for="status_inativo">Inativo / Fora de Frota</label>
+					</td>
                     <td><button type="submit" name="botao" value="PesquisarStatus">Pesquisar</button></td> <!-- PesquisarStatus -->
                 </tr>
 
@@ -170,40 +169,40 @@
                         </tr>
 
                         <tr>
-                            <td><label>Marca:</label></td>
+                            <th scope="row"><label>Marca:</label></th>
                             <td>${carro.marca}</td>
 
-                            <td><label>Modelo:</label></td>
+                            <th scope="row"><label>Modelo:</label></th>
                             <td>${carro.modelo}</td>
                             
-                            <td><label>Cor:</label></td>
+                            <th scope="row"><label>Cor:</label></th>
                             <td>${carro.cor}</td>
                         </tr>
 
                         <tr>
-                            <td><label>Ano:</label></td>
+                            <th scope="row"><label>Ano:</label></th>
                             <td>${carro.ano}</td>
 
-                            <td><label>Combustível:</label></td>
+                            <th scope="row"><label>Combustível:</label></th>
                             <td>${carro.tipoCombustivel}</td>
 
-                            <td><label>Litros no tanque:</label></td>
+                            <th scope="row"><label>Litros no tanque:</label></th>
                             <td>${carro.litrosCombustivel}</td>
                         </tr>
 
                         <tr>
-                            <td><label>KM Rodados:</label></td>
+                            <th scope="row"><label>km Rodados:</label></th>
                             <td>${carro.kmRodados}</td>
 
-                            <td><label>Câmbio:</label></td>
+                            <th scope="row"><label>Câmbio:</label></th>
                             <td>${carro.tipoCambio}</td>
 
-                            <td><label>Status:</label></td>
+                            <th scope="row"><label>Status:</label></th>
                             <td>${carro.statusCarro}</td>
                         </tr>
 
                         <tr>
-                            <td><label>Categoria:</label></td>
+                            <th scope="row"><label>Categoria:</label></th>
                             <td>${carro.categoria.nome}</td>
 
                             <td colspan="4">
@@ -230,9 +229,18 @@
 				</h2>
 			</c:if>
 		</aside>
+
     </main>
 
-    <footer></footer>
+    <footer>
+        <p>Desenvolvido por <a href="https://github.com/AnGeloMuniZZZ" target="_blank">Angelo</a> & <a href="https://github.com/FabioAS7" target="_blank">Fábio</a></p>
+        <p>|</p>
+        <p> <a href="${pageContext.request.contextPath}/politicadeprivacidade.html" target="_blank">Política de Privacidade</a></p>
+        <p>|</p>
+        <p><a href="${pageContext.request.contextPath}/termosecondicoes.html">Termos e Condições</a></p>
+        <p>|</p>
+        <p><a href="${pageContext.request.contextPath}/maven-site/index.html" target="_blank">Sobre este site (MavenSite<img src="../../assets/maven.ico" alt="Maven_icone">)</a></p>
+    </footer>
 
 </body>
 </html>

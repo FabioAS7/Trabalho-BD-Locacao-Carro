@@ -6,11 +6,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Reparo</title>
-    
-    <link rel="stylesheet" href="./css/main.css">
+    <title>Home</title>
 
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/footer.css">
 </head>
 <body>
 
@@ -22,8 +22,8 @@
     	<a href="cadastrar_reparo">cadastrar_reparo</a> |
     	<a href="index">index</a>
     </header>
-    
-    <p>ESSE É O INDEX</p>
 
+    <p>ESSE É O INDEX</p>
+    <P>Angelo seu vacilão</P>
 </body>
 </html>

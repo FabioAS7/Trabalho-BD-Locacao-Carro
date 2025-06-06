@@ -8,7 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Reparo</title>
 
+    <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/footer.css">
 </head>
 <body>
 
@@ -66,61 +68,118 @@
         <section>
             <c:if test="${not empty carros}">
                 <table class="tabela_de_pesquisa_carro">
-                    <c:forEach var="c" items="${carros}">
+                    <c:forEach var="carro" items="${carros}">
                         <tr class="cabecalho_carro">
-                            <td colspan="6"><strong>Carro &#x1F697: ${c.placa}</strong></td>
+                            <td colspan="6"><strong>Carro &#x1F697: ${carro.placa}</strong></td>
                         </tr>
 
                         <tr>
-                            <td><label>Marca:</label></td>
-                            <td>${c.marca}</td>
+                            <th scope="row"><label>Marca:</label></th>
+                            <td>${carro.marca}</td>
 
-                            <td><label>Modelo:</label></td>
-                            <td>${c.modelo}</td>
+                            <th scope="row"><label>Modelo:</label></th>
+                            <td>${carro.modelo}</td>
                             
-                            <td><label>Cor:</label></td>
-                            <td>${c.cor}</td>
+                            <th scope="row"><label>Cor:</label></th>
+                            <td>${carro.cor}</td>
                         </tr>
 
                         <tr>
-                            <td><label>Ano:</label></td>
-                            <td>${c.ano}</td>
+                            <th scope="row"><label>Ano:</label></th>
+                            <td>${carro.ano}</td>
 
-                            <td><label>Combustível:</label></td>
-                            <td>${c.tipo_combustivel}</td>
+                            <th scope="row"><label>Combustível:</label></th>
+                            <td>${carro.tipoCombustivel}</td>
 
-                            <td><label>Litros no tanque:</label></td>
-                            <td>${c.litros_combustivel}</td>
+                            <th scope="row"><label>Litros no tanque:</label></th>
+                            <td>${carro.litrosCombustivel}</td>
                         </tr>
 
                         <tr>
-                            <td><label>KM Rodados:</label></td>
-                            <td>${c.km_rodados}</td>
+                            <th scope="row"><label>km Rodados:</label></th>
+                            <td>${carro.kmRodados}</td>
 
-                            <td><label>Câmbio:</label></td>
-                            <td>${c.tipo_cambio}</td>
+                            <th scope="row"><label>Câmbio:</label></th>
+                            <td>${carro.tipoCambio}</td>
 
-                            <td><label>Status:</label></td>
-                            <td>${c.status_carro}</td>
+                            <th scope="row"><label>Status:</label></th>
+                            <td>${carro.statusCarro}</td>
                         </tr>
 
                         <tr>
-                            <td><label>Categoria:</label></td>
-                            <td>${c.categoria_id}</td>
+                            <th scope="row"><label>Categoria:</label></th>
+                            <td>${carro.categoria.nome}</td>
 
                             <td colspan="4">
-                                <a class="a_link_clicavel" href="${pageContext.request.contextPath }/cadastrar_carro?acao=selecionar&id=${c.placa}">Selecionar carro</a>
-                            </td>
+                                <a class="a_link_clicavel" href="${pageContext.request.contextPath}/cadastrar_carro?acao=selecionar&id=${carro.placa}">Selecionar</a>
+                            </td> <!-- selecionar -->
                         </tr>
                         <tr><td colspan="6"><hr></td></tr>
                     </c:forEach>
                 </table>
-
             </c:if>
         </section>
+
+        <section>
+            <c:if test="${not empty reparos}">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID:</th>
+                            <th>Dia de entrada:</th>
+                            <th>Quant. de dias em reparo:</th>
+                            <th>Descrição do problema:</th>
+                            <th>Valor do reparo:</th>
+                            <th>Placa do carro:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="reparos" items="${reparos}">
+                            <tr>
+                                <td>${reparos.id}</td>
+                                <td>${reparos.diaEntrada}</td>
+                                <td>${reparos.quantDiasReparo}</td>
+                                <td>${reparos.descricaoProblema}</td>
+                                <td>${reparos.valorReparo}</td>
+                                <td>${reparos.carro.placa}</td>
+								<td colspan="2">
+                                    <a class="a_link_clicavel"
+									href="${pageContext.request.contextPath }/cadastrar_categoria?acao=editar&id=${categoria.id}">Editar</a>
+                                    <a class="a_link_clicavel"
+									href="${pageContext.request.contextPath }/cadastrar_categoria?acao=excluir&id=${categoria.id}">Deletar</a>
+                                </td> <!-- editar | excluir -->
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </c:if>
+        </section>
+
+        <aside>
+			<c:if test="${not empty saida}">
+				<h2 class="h2_mensagem_VALIDACAO">
+					<c:out value="${saida}"/>
+				</h2>
+			</c:if>
+
+			<c:if test="${not empty erro}">
+				<h2 class="h2_mensagem_ERRO">
+					<c:out value="${erro}"/>
+				</h2>
+			</c:if>
+		</aside>
         
     </main>
 
-    <footer></footer>
+    <footer>
+        <p>Desenvolvido por <a href="https://github.com/AnGeloMuniZZZ" target="_blank">Angelo</a> & <a href="https://github.com/FabioAS7" target="_blank">Fábio</a></p>
+        <p>|</p>
+        <p> <a href="${pageContext.request.contextPath}/politicadeprivacidade.html" target="_blank">Política de Privacidade</a></p>
+        <p>|</p>
+        <p><a href="${pageContext.request.contextPath}/termosecondicoes.html">Termos e Condições</a></p>
+        <p>|</p>
+        <p><a href="${pageContext.request.contextPath}/maven-site/index.html" target="_blank">Sobre este site (MavenSite<img src="../../assets/maven.ico" alt="Maven_icone">)</a></p>
+    </footer>
+
 </body>
 </html>

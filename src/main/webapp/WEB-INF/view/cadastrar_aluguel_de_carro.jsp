@@ -8,7 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Realizar aluguel de carro</title>
 
+    <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/footer.css">
 </head>
 <body>
 
@@ -32,22 +34,30 @@
             <table>
                 <tr>
                     <td><Label for="carro_placa">Placa do Carro:</Label></td>
-                    <td><input type="text" id="carro_placa" name="carro_placa" ></td>
-                    <td><button type="submit" name="botao" value="Pesquisar">Pesquisar</button></td>
+
+                    <td><input type="text" maxlength="8" id="carro_placa" name="carro_placa" value='<c:out value="${aluguelDeCarro.carro.placa}"/>'></td>
+
+                    <td><button type="submit" name="botao" value="PesquisarCarroPlaca">Pesquisar</button></td> <!--PesquisarCarroPlaca-->
                 </tr>
 
                 <tr>
                     <td><Label for="locatario_cpf">CPF do locatario:</Label></td>
+
+                    <td><input type="text" maxlength="11" id="locatario_cpf" name="locatario_cpf" value='<c:out value="${aluguelDeCarro.locatario.cpf}"/>'></td>
+
+                    <td><button type="submit" name="botao" value="PesquisarLocatarioCpf">Pesquisar</button></td> <!--PesquisarLocatarioCpf-->
                 </tr>
 
                 <tr>
                     <td><Label for="data_retirada">Dia de retirada:</Label></td>
-                    <td><input type="date" id="data_retirada" name="data_retirada" ></td>
+
+                    <td><input type="date" id="data_retirada" name="data_retirada" value='<c:out value="${aluguelDeCarro.locatario.dataRetirada}"/>'></td>
                 </tr>
 
                 <tr>
                     <td><Label for="data_devolucao">Dia de devolução:</Label></td>
-                    <td><input type="date" id="data_devolucao" name="data_devolucao" ></td>
+
+                    <td><input type="date" id="data_devolucao" name="data_devolucao" value='<c:out value="${aluguelDeCarro.locatario.dataDevolucao}"/>'></td>
                 </tr>
             </table>
         </form>
@@ -57,62 +67,83 @@
         <section>
             <c:if test="${not empty carros}">
                 <table class="tabela_de_pesquisa_carro">
-                    <c:forEach var="c" items="${carros}">
+                    <c:forEach var="carro" items="${carros}">
                         <tr class="cabecalho_carro">
-                            <td colspan="6"><strong>Carro &#x1F697: ${c.placa}</strong></td>
+                            <td colspan="6"><strong>Carro &#x1F697: ${carro.placa}</strong></td>
                         </tr>
 
                         <tr>
-                            <td><label>Marca:</label></td>
-                            <td>${c.marca}</td>
+                            <th scope="row"><label>Marca:</label></th>
+                            <td>${carro.marca}</td>
 
-                            <td><label>Modelo:</label></td>
-                            <td>${c.modelo}</td>
+                            <th scope="row"><label>Modelo:</label></th>
+                            <td>${carro.modelo}</td>
                             
-                            <td><label>Cor:</label></td>
-                            <td>${c.cor}</td>
+                            <th scope="row"><label>Cor:</label></th>
+                            <td>${carro.cor}</td>
                         </tr>
 
                         <tr>
-                            <td><label>Ano:</label></td>
-                            <td>${c.ano}</td>
+                            <th scope="row"><label>Ano:</label></th>
+                            <td>${carro.ano}</td>
 
-                            <td><label>Combustível:</label></td>
-                            <td>${c.tipo_combustivel}</td>
+                            <th scope="row"><label>Combustível:</label></th>
+                            <td>${carro.tipoCombustivel}</td>
 
-                            <td><label>Litros no tanque:</label></td>
-                            <td>${c.litros_combustivel}</td>
+                            <th scope="row"><label>Litros no tanque:</label></th>
+                            <td>${carro.litrosCombustivel}</td>
                         </tr>
 
                         <tr>
-                            <td><label>KM Rodados:</label></td>
-                            <td>${c.km_rodados}</td>
+                            <th scope="row"><label>km Rodados:</label></th>
+                            <td>${carro.kmRodados}</td>
 
-                            <td><label>Câmbio:</label></td>
-                            <td>${c.tipo_cambio}</td>
+                            <th scope="row"><label>Câmbio:</label></th>
+                            <td>${carro.tipoCambio}</td>
 
-                            <td><label>Status:</label></td>
-                            <td>${c.status_carro}</td>
+                            <th scope="row"><label>Status:</label></th>
+                            <td>${carro.statusCarro}</td>
                         </tr>
 
                         <tr>
-                            <td><label>Categoria:</label></td>
-                            <td>${c.categoria_id}</td>
+                            <th scope="row"><label>Categoria:</label></th>
+                            <td>${carro.categoria.nome}</td>
 
                             <td colspan="4">
-                                <a class="a_link_clicavel" href="${pageContext.request.contextPath }/cadastrar_carro?acao=selecionar&id=${c.placa}">Selecionar carro</a>
-                            </td>
+                                <a class="a_link_clicavel" href="${pageContext.request.contextPath }/cadastrar_carro?acao=selecionar&id=${carro.placa}">Selecionar</a>
+                            </td> <!-- selecionar -->
                         </tr>
                         <tr><td colspan="6"><hr></td></tr>
                     </c:forEach>
                 </table>
-
             </c:if>
         </section>
 
+        <aside>
+			<c:if test="${not empty saida}">
+				<h2 class="h2_mensagem_VALIDACAO">
+					<c:out value="${saida}"/>
+				</h2>
+			</c:if>
+
+			<c:if test="${not empty erro}">
+				<h2 class="h2_mensagem_ERRO">
+					<c:out value="${erro}"/>
+				</h2>
+			</c:if>
+		</aside>
+
     </main>
 
-    <footer></footer>
+    <footer>
+        <p>Desenvolvido por <a href="https://github.com/AnGeloMuniZZZ" target="_blank">Angelo</a> & <a href="https://github.com/FabioAS7" target="_blank">Fábio</a></p>
+        <p>|</p>
+        <p> <a href="${pageContext.request.contextPath}/politicadeprivacidade.html" target="_blank">Política de Privacidade</a></p>
+        <p>|</p>
+        <p><a href="${pageContext.request.contextPath}/termosecondicoes.html">Termos e Condições</a></p>
+        <p>|</p>
+        <p><a href="${pageContext.request.contextPath}/maven-site/index.html" target="_blank">Sobre este site (MavenSite<img src="../../assets/maven.ico" alt="Maven_icone">)</a></p>
+    </footer>
     
 </body>
 </html>
