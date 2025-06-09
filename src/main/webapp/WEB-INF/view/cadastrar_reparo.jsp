@@ -25,7 +25,7 @@
     
     <main>
 
-        <form action="cadastrar_reparo.html" method="post">
+        <form action="cadastrar_reparo" method="post">
             <h1>Enviar para Reparo</h1>
 
             <input type="hidden" name="id" value="${reparo.id}">
@@ -34,30 +34,43 @@
 
                 <tr>
                     <td><Label for="carro_placa">Placa do Carro:</Label></td>
-                    <td><input type="text" id="carro_placa" name="carro_placa" required></td>
-                    <td><button type="submit" name="botao" value="Pesquisar">Pesquisar</button></td>
+                    <td><input type="text" id="carro_placa" name="carro_placa" maxlength="8"></td>
+                    <td><button type="submit" name="botao" value="PesquisarPlaca">Pesquisar</button></td>
                 </tr>
 
                 <tr>
                     <td><Label for="dia_entrada">Dia de entrada:</Label></td>
-                    <td><input type="date" id="dia_entrada" name="dia_entrada" required></td>
-                    <td><button type="submit" name="botao" value="Pesquisar">Pesquisar</button></td>
+                    <td><input type="date" id="dia_entrada" name="dia_entrada" ></td>
                 </tr>
 
                 <tr>
                     <td><Label for="quant_dias_reparo">Quant. de dias em reparo:</Label></td>
-                    <td><input type="number" min="1" max="999" id="quant_dias_reparo" name="quant_dias_reparo" required></td>
+                    <td><input type="number" min="1" max="999" id="quant_dias_reparo" name="quant_dias_reparo" ></td>
                 </tr>
 
                 <tr>
                     <td><Label for="descricao_problema">Descrição do problema:</Label></td>
                     <td><textarea name="descricao_problema" id="descricao_problema" maxlength="255" placeholder="Descreva o problema do carro em detalhes..." rows="5" 
-                    style="resize: none; width: 100%;" required></textarea></td>
+                    style="resize: none; width: 100%;" ></textarea></td>
                 </tr>
 
                 <tr>
                     <td><Label for="valor_reparo">Valor do reparo:</Label></td>
-                    <td><input type="number" min="0" max="9999999.99" step="0.01" id="valor_reparo" name="valor_reparo" required></td>
+                    <td><input type="number" min="0" max="9999999.99" step="0.01" id="valor_reparo" name="valor_reparo" ></td>
+                </tr>
+                
+                <tr>
+                    <td><button type="submit" name="botao" value="Adicionar">Adicionar
+                    <img src="" alt="icone">
+                    </button></td>  <!-- Adicionar -->
+                    
+                    <td><button type="submit" name="botao" value="Listar">Listar
+                    <img src="" alt="icone">
+                    </button></td>  <!-- Listar -->
+
+                    <td><button type="submit" name="botao" value="Remover">Remover
+                    <img src="" alt="icone">
+                    </button></td>  <!-- Remover -->
                 </tr>
 
             </table>
@@ -111,7 +124,7 @@
                             <td>${carro.categoria.nome}</td>
 
                             <td colspan="4">
-                                <a class="a_link_clicavel" href="${pageContext.request.contextPath}/cadastrar_carro?acao=selecionar&id=${carro.placa}">Selecionar</a>
+                                <a class="a_link_clicavel" href="${pageContext.request.contextPath}/cadastrar_reparo?acao=selecionar&id=${carro.placa}">Selecionar</a>
                             </td> <!-- selecionar -->
                         </tr>
                         <tr><td colspan="6"><hr></td></tr>
@@ -144,9 +157,9 @@
                                 <td>${reparos.carro.placa}</td>
 								<td colspan="2">
                                     <a class="a_link_clicavel"
-									href="${pageContext.request.contextPath }/cadastrar_categoria?acao=editar&id=${categoria.id}">Editar</a>
+									href="${pageContext.request.contextPath }/cadastrar_reparo?acao=editar&id=${reparos.id}">Editar</a>
                                     <a class="a_link_clicavel"
-									href="${pageContext.request.contextPath }/cadastrar_categoria?acao=excluir&id=${categoria.id}">Deletar</a>
+									href="${pageContext.request.contextPath }/cadastrar_reparo?acao=excluir&id=${reparos.id}">Deletar</a>
                                 </td> <!-- editar | excluir -->
                             </tr>
                         </c:forEach>

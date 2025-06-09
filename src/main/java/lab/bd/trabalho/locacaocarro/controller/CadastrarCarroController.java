@@ -42,16 +42,15 @@ public class CadastrarCarroController {
 		} catch (Exception e) {
 			erro = e.getMessage();
 		}
-		
+
 		if (params.get("id") != null && !params.get("id").isEmpty()) {
 			placa = params.get("id");
 		}
-		
 
 		// Controle dos botoes excluir e editar
 		try {
 			if (params.get("id") != null && !params.get("id").isEmpty()) {
-				
+
 				if (acao.equals("editar")) {
 					carro = carroR.getReferenceById(placa);
 
@@ -63,7 +62,13 @@ public class CadastrarCarroController {
 				}
 			}
 		} catch (Exception e) {
-			erro = e.getMessage();
+
+			if (e.getMessage().contains("FK74srjkqum99t03ftfoj5v425r")) {
+				erro = "O carro esta sendo referenciado na tabela de carros alugados";
+			} else {
+				erro = e.getMessage();
+			}
+
 		}
 
 		model.addAttribute("erro", erro);
@@ -139,13 +144,12 @@ public class CadastrarCarroController {
 				Categoria c = categoriaR.findById(Integer.parseInt(categoria)).orElse(null);
 				carro.setCategoria(c);
 				carroR.save(carro);
-				
-				if(carroR.findById(placa).isPresent()) {
+
+				if (carroR.findById(placa).isPresent()) {
 					saida = "Carro (" + placa + ") atualizado com sucesso";
 				} else {
 					saida = "Carro adicionado a frota com sucesso";
 				}
-				
 
 			}
 
@@ -156,11 +160,15 @@ public class CadastrarCarroController {
 			}
 
 		} catch (Exception e) {
+
 			if (e.getMessage().contains("truncados na tabela")) {
 				erro = "Um ou mais campos ultrapassaram o tamanho permitido";
+			} else if (e.getMessage().contains("FK74srjkqum99t03ftfoj5v425r")) {
+				erro = "O carro esta sendo referenciado na tabela de carros alugados";
 			} else {
 				erro = e.getMessage();
 			}
+
 		}
 
 		model.addAttribute("erro", erro);
