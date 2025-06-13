@@ -95,6 +95,7 @@ public class CadastrarCarroController {
 		String txtFiltro1 = params.get("filtroTexto1");
 		String txtFiltro2 = params.get("filtroTexto2");
 		String txtFiltro3 = params.get("filtroTexto3");
+		String filtroTextoCat = params.get("filtroTextoCat");
 		String cmd = params.get("botao");
 		String saida = "";
 		String erro = "";
@@ -140,12 +141,12 @@ public class CadastrarCarroController {
 				case ("Status"):
 					carros = carroR.findByStatusCarro(txtFiltro3);
 					break;
+				case ("cat"):
+					carros = carroR.findCarroCategoria(filtroTextoCat);
+					break;
 				default:
 					break;
 				}
-		
-			} else if (cmd.equalsIgnoreCase("PesquisarCategoria")) {
-				carros = carroR.findCarroCategoria(categoria);
 			}
 
 			// Botao "Adicionar"
