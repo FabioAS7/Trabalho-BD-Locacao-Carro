@@ -192,7 +192,7 @@
         <p>|</p>
         <p><a href="${pageContext.request.contextPath}/termosecondicoes.html">Termos e Condições</a></p>
         <p>|</p>
-        <p><a href="${pageContext.request.contextPath}/maven-site/index.html" target="_blank">Sobre este site (MavenSite<img src="../../assets/maven.ico" alt="Maven_icone">)</a></p>
+        <p><a href="${pageContext.request.contextPath}/maven-site/index.html" target="_blank">Sobre este site (MavenSite<img src="./assets/maven.ico" alt="Maven_icone">)</a></p>
     </footer>
 
 </body>

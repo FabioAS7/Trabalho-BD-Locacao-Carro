@@ -51,10 +51,10 @@ public class CadastrarCarroController {
 		try {
 			if (params.get("id") != null && !params.get("id").isEmpty()) {
 
-				if (acao.equals("editar")) {
+				if (acao.equalsIgnoreCase("editar")) {
 					carro = carroR.getReferenceById(placa);
 
-				} else if (acao.equals("excluir")) {
+				} else if (acao.equalsIgnoreCase("excluir")) {
 					carro = carroR.getReferenceById(placa);
 					carroR.deleteById(placa);
 					saida = "Carro (" + carro.getPlaca() + ") removido da frota com sucesso";

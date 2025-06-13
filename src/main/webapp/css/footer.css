@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+footer{
+    height: auto;
+    background-color: #00122D;
+    text-align: center;
+    color: #EFFFFF;
+    width: 100%;
+    padding: 20px ;
+}
+
+footer p{
+    display: inline;
+    padding: 10px;
+}
+
+footer p > a{
+    text-decoration: none;
+    color: #EFFFFF;
+}
+
+footer p > a:hover{
+    text-decoration: underline;
+}
