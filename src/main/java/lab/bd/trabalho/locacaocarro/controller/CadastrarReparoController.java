@@ -29,16 +29,19 @@ public class CadastrarReparoController {
 	@RequestMapping(name = "cadastrar_reparo", value = "/cadastrar_reparo", method = RequestMethod.GET)
 	public ModelAndView CadastrarReparoGet(@RequestParam Map<String, String> params, ModelMap model) {
 		Integer idreparo = null;
+		String idplaca = params.get("id");
 		String acao = params.get("acao");
 		String saida = "";
 		String erro = "";
 		Reparo reparo = new Reparo();
+		Carro carro = new Carro();
 		
-		if (params.get("id") != null && !params.get("id").isEmpty()) {
+		if (params.get("id") != null && !params.get("id").isEmpty() && (params.get("acao").equalsIgnoreCase("editar") || params.get("acao").equalsIgnoreCase("excluir"))) {
 			idreparo = Integer.parseInt(params.get("id"));
 		}
 		
 		try {
+			
 			if (params.get("id") != null && !params.get("id").isEmpty()) {
 				
 				if(acao.equalsIgnoreCase("editar")) {
@@ -49,6 +52,10 @@ public class CadastrarReparoController {
 					reparoR.deleteById(idreparo);
 					saida = "Reparo ( ID:" +reparo.getId()+ ", Placa do Carro: " +reparo.getCarro().getPlaca()+ ") deletado com sucesso";
 					reparo = null;
+					
+				} else if(acao.equalsIgnoreCase("selecionar")) {
+					carro = carroR.findByPlaca(idplaca);
+					reparo.setCarro(carro);
 				}
 			}
 			
@@ -75,7 +82,7 @@ public class CadastrarReparoController {
 		String erro = "";
 		Reparo reparo = new Reparo();
 		List<Reparo> reparos = new ArrayList<Reparo>();
-		//List<Carro> carros = new ArrayList<Carro>();
+		List<Carro> carros = new ArrayList<Carro>();
 		
 		if (params.get("id") != null && !params.get("id").isEmpty()) {
 			id = Integer.parseInt(params.get("id"));
@@ -86,6 +93,8 @@ public class CadastrarReparoController {
 			// Botao "Listar"
 			if (cmd.equalsIgnoreCase("Listar")) {
 				reparos = reparoR.findAll();
+			} else if (cmd.equalsIgnoreCase("PesquisarPlaca")) {
+				carros = carroR.findAll();
 			}
 			
 			// Botao "Adicionar"
@@ -126,6 +135,7 @@ public class CadastrarReparoController {
 		model.addAttribute("erro", erro);
 		model.addAttribute("saida", saida);
 		model.addAttribute("reparos", reparos);
+		model.addAttribute("carros", carros);
 		return new ModelAndView("cadastrar_reparo");
 	}
 	

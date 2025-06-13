@@ -34,29 +34,30 @@
 
                 <tr>
                     <td><Label for="carro_placa">Placa do Carro:</Label></td>
-                    <td><input type="text" id="carro_placa" name="carro_placa" maxlength="8"></td>
-                    <td><button type="submit" name="botao" value="PesquisarPlaca">Pesquisar</button></td>
+                    <td><input type="text" id="carro_placa" name="carro_placa" maxlength="8" value='<c:out value="${reparo.carro.placa}"/>'></td>
+                    <td><button type="submit" name="botao" value="PesquisarPlaca">Listar Carros</button></td>
                 </tr>
 
                 <tr>
                     <td><Label for="dia_entrada">Dia de entrada:</Label></td>
-                    <td><input type="date" id="dia_entrada" name="dia_entrada" ></td>
+                    <td><input type="date" id="dia_entrada" name="dia_entrada" value='<c:out value="${reparo.diaEntrada}"/>'></td>
                 </tr>
 
                 <tr>
                     <td><Label for="quant_dias_reparo">Quant. de dias em reparo:</Label></td>
-                    <td><input type="number" min="1" max="999" id="quant_dias_reparo" name="quant_dias_reparo" ></td>
+                    <td><input type="number" min="0" max="999" id="quant_dias_reparo" name="quant_dias_reparo" value='<c:out value="${reparo.quantDiasReparo}"/>'></td>
                 </tr>
 
                 <tr>
                     <td><Label for="descricao_problema">Descrição do problema:</Label></td>
-                    <td><textarea name="descricao_problema" id="descricao_problema" maxlength="255" placeholder="Descreva o problema do carro em detalhes..." rows="5" 
-                    style="resize: none; width: 100%;" ></textarea></td>
+                    <td><textarea name="descricao_problema" id="descricao_problema" maxlength="255"
+    					placeholder="Descreva o problema do carro em detalhes..." rows="5" 
+   						style="resize: none; width: 100%;"><c:out value="${reparo.descricaoProblema}"/></textarea></td>
                 </tr>
 
                 <tr>
                     <td><Label for="valor_reparo">Valor do reparo:</Label></td>
-                    <td><input type="number" min="0" max="9999999.99" step="0.01" id="valor_reparo" name="valor_reparo" ></td>
+                    <td><input type="number" min="0" max="9999999.99" step="0.01" id="valor_reparo" name="valor_reparo" value='<c:out value="${reparo.valorReparo}"/>'></td>
                 </tr>
                 
                 <tr>
