@@ -90,6 +90,11 @@ public class CadastrarCarroController {
 		String tipoCambio = params.get("tipo_cambio");
 		String statusCarro = params.get("status_carro");
 		String categoria = params.get("categoria_id");
+		String filtro = params.get("filtro");
+		String txtFiltro = params.get("filtroTexto");
+		String txtFiltro1 = params.get("filtroTexto1");
+		String txtFiltro2 = params.get("filtroTexto2");
+		String txtFiltro3 = params.get("filtroTexto3");
 		String cmd = params.get("botao");
 		String saida = "";
 		String erro = "";
@@ -110,21 +115,35 @@ public class CadastrarCarroController {
 			if (cmd.equalsIgnoreCase("Listar")) {
 				carros = carroR.findAll();
 			} else if (cmd.equalsIgnoreCase("PesquisarPlaca")) { // Botoes de pesuisa indiviuais
-				//
-			} else if (cmd.equalsIgnoreCase("PesquisarMarca")) {
-				carros = carroR.findByMarca(marca);
-			} else if (cmd.equalsIgnoreCase("PesquisarModelo")) {
-				carros = carroR.findByModelo(modelo);
-			} else if (cmd.equalsIgnoreCase("PesquisarCor")) {
-				carros = carroR.findByCor(cor);
-			} else if (cmd.equalsIgnoreCase("PesquisarAno")) {
-				carros = carroR.findByAno(LocalDate.parse(ano));
-			} else if (cmd.equalsIgnoreCase("PesquisarTipoDeCombustivel")) {
-				carros = carroR.findByTipoCombustivel(tipoCombustivel);
-			} else if (cmd.equalsIgnoreCase("PesquisarTipoDeCambio")) {
-				carros = carroR.findByTipoCambio(tipoCambio);
-			} else if (cmd.equalsIgnoreCase("PesquisarStatus")) {
-				carros = carroR.findByStatusCarro(statusCarro);
+				carro = carroR.findByPlaca(placa);
+				model.addAttribute("carro", carro);
+			} else if (cmd.equalsIgnoreCase("Filtrar")) {
+				switch (filtro) {
+				case ("Marca"):
+					carros = carroR.findByMarca(txtFiltro);
+					break;
+				case ("Modelo"):
+					carros = carroR.findByModelo(txtFiltro);
+					break;
+				case ("Cor"):
+					carros = carroR.findByCor(txtFiltro);
+					break;
+				case ("Ano"):
+					carros = carroR.findByAno(LocalDate.parse(txtFiltro));
+					break;
+				case ("TipoCombustivel"):
+					carros = carroR.findByTipoCombustivel(txtFiltro1);
+					break;
+				case ("TipoCambio"):
+					carros = carroR.findByTipoCambio(txtFiltro2);
+					break;
+				case ("Status"):
+					carros = carroR.findByStatusCarro(txtFiltro3);
+					break;
+				default:
+					break;
+				}
+		
 			} else if (cmd.equalsIgnoreCase("PesquisarCategoria")) {
 				carros = carroR.findCarroCategoria(categoria);
 			}
