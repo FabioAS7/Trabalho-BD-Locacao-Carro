@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/footer.css">
+    <script src="./js/filtro.js"></script>
 </head>
 <body>
 
@@ -27,7 +28,80 @@
         
         <form action="cadastrar_carro" method="post">
             <h1>Controle de Carros</h1>
-            <table class="tabela_de_entrada_de_dados">
+
+			<table class="superfiltro">    
+            	<tr>
+            		<td><label for="filtro">Filtrar por:</label></td>
+            		<td>
+            			<select name="filtro" id="filtro" onchange="filtros()">
+            				<option selected disabled>Filtros</option>
+						    <option value="Marca">Marca</option>
+						    <option value="Modelo">Modelo</option>
+						    <option value="Cor">Cor</option>
+						    <option value="Ano">Ano</option>
+						    <option value="TipoCombustivel">Tipo de Combustivel</option>
+						    <option value="TipoCambio">Tipo de Cambio</option>
+						    <option value="Status">Status do carro</option>
+						    <option value="cat">Categoria</option>
+						</select>
+					</td>
+            	
+            		<td>
+            			<select class="oculta" id="filtroCombustivel" name="filtroTexto1">
+						    <option selected disabled>Selecione o combustível</option>
+						    <option value="Gasolina">Gasolina</option>
+						    <option value="Etanol">Etanol</option>
+						    <option value="Diesel">Diesel</option>
+						    <option value="GNV">GNV (Gás Natural Veicular)</option>
+						    <option value="Híbrido">Híbrido</option>
+						    <option value="Flex">Flex</option>
+						    <option value="Hidrogênio">Hidrogênio</option>
+						</select>
+					</td>
+            		
+            		<td>
+            			<select class="oculta" id="filtroCambio" name="filtroTexto2">
+						    <option selected disabled>Selecione o cambio</option>
+						    <option value="Manual">Manual</option>
+						    <option value="Automatizado (embreagem simples)">Automatizado (embreagem simples)</option>
+						    <option value="Automatizado (embreagem dupla)">Automatizado (embreagem dupla)</option>
+						    <option value="Automatico (hidraulico)">Automatico (hidraulico)</option>
+						    <option value="CVT">CVT</option>
+						    <option value="Sequencial">Sequencial</option>
+						    <option value="Eletrico (sem cambio convencional)">Eletrico (sem cambio convencional)</option>
+						</select>
+            		</td>
+            		
+            		<td>
+            			<select class="oculta" id="filtroStatus" name="filtroTexto3">
+            				<option selected disabled>Selecione o status</option>
+            				<option value="Disponivel">Disponível</option>
+            				<option value="Alugado">Alugado</option>
+            				<option value="Em Reparo">Em Reparo</option>
+            				<option value="Inativo">Inativo</option>
+            			</select>
+            		</td>
+     
+                    <td>
+                        <select class="oculta" name="filtroTextoCat" id="filtroCat">
+                            <option value="" selected disabled>Selecione a categoria</option>
+                            <c:forEach var="cate" items="${categorias}">
+							    <option value="${cate.id}"
+								    <c:if test="${carro.categoria.id == cate.id}">selected</c:if>
+                                    >${cate.nome}
+                                </option>
+						    </c:forEach>
+                        </select>
+                    </td>
+            		
+            		<td><input type="text" id="filtroTexto" name="filtroTexto" placeholder="Digite aqui o filtro"></td>
+					<td><button type="submit" name="botao" value="Filtrar">Filtrar
+                    <img src="" alt="icone">
+                    </button></td>
+            	
+            	</tr>
+            	</table>        
+			    <table class="tabela_de_entrada_de_dados">
                 <tr>
                     <td><Label for="placa">Placa do Carro:</Label></td>
 
@@ -39,25 +113,21 @@
                 <tr>
                     <td><Label for="marca">Marca:</Label></td>
                     <td><input type="text" id="marca" name="marca" value='<c:out value="${carro.marca}"/>'></td>
-                    <td><button type="submit" name="botao" value="PesquisarMarca">Pesquisar</button></td> <!-- PesquisarMarca -->
                 </tr>
 
                 <tr>
                     <td><Label for="modelo">Modelo:</Label></td>
                     <td><input type="text" id="modelo" name="modelo" value='<c:out value="${carro.modelo}"/>'></td>
-                    <td><button type="submit" name="botao" value="PesquisarModelo">Pesquisar</button></td> <!-- PesquisarModelo -->
                 </tr>
 
                 <tr>
                     <td><Label for="cor">Cor:</Label></td>
                     <td><input type="text" id="cor" name="cor" value='<c:out value="${carro.cor}"/>'></td>
-                    <td><button type="submit" name="botao" value="PesquisarCor">Pesquisar</button></td> <!-- PesquisarCor -->
                 </tr>
 
                 <tr>
                     <td><Label for="ano">Ano:</Label></td>
                     <td><input type="date" id="ano" name="ano" value='<c:out value="${carro.ano}"/>'></td>
-                    <td><button type="submit" name="botao" value="PesquisarAno">Pesquisar</button></td> <!-- PesquisarAno -->
                 </tr>
 
                 <tr>
@@ -74,7 +144,6 @@
 						    <option value="Hidrogênio" <c:if test="${carro.tipoCombustivel == 'Hidrogênio'}">selected</c:if>>Hidrogênio</option>
 						</select>
                     </td>
-                    <td><button type="submit" name="botao" value="PesquisarTipoDeCombustivel">Pesquisar</button></td> <!-- PesquisarTipoDeCombustivel -->
                 </tr>
 
                 <tr>
@@ -101,7 +170,6 @@
                             <option value="Eletrico (sem cambio convencional)" <c:if test="${carro.tipoCambio == 'Eletrico (sem cambio convencional)'}">selected</c:if>>Elétrico (sem câmbio convencional)</option>
                         </select>
                     </td>
-                    <td><button type="submit" name="botao" value="PesquisarTipoDeCambio">Pesquisar</button></td> <!-- PesquisarTipoDeCambio -->
                 </tr>
                 
                 <tr>
@@ -120,7 +188,6 @@
 					           <c:if test="${carro.statusCarro == 'Inativo'}">checked</c:if>>
 					    <label for="status_inativo">Inativo / Fora de Frota</label>
 					</td>
-                    <td><button type="submit" name="botao" value="PesquisarStatus">Pesquisar</button></td> <!-- PesquisarStatus -->
                 </tr>
 
                 <tr>
@@ -137,8 +204,6 @@
 						    </c:forEach>
                         </select>
                     </td>
-
-                    <td><button type="submit" name="botao" value="PesquisarCategoria">Pesquisar</button></td> <!-- PesquisarCategoria -->
                 </tr>
 
                 <tr>
