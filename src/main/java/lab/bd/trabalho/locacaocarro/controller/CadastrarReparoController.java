@@ -54,7 +54,7 @@ public class CadastrarReparoController {
 					reparo = null;
 					
 				} else if(acao.equalsIgnoreCase("selecionar")) {
-					carro = carroR.findByPlaca(idplaca);
+					carro = carroR.getReferenceById(idplaca);
 					reparo.setCarro(carro);
 				}
 			}

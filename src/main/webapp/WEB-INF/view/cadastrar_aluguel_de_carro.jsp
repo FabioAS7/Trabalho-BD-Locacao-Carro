@@ -29,7 +29,7 @@
 
             <h1>Realizar Aluguel</h1>
 
-            <input type="hidden" name="id" value="${aluguel_de_carro.id}">
+            <input type="hidden" name="id" value="${aluguelDeCarro.id}">
 
             <table>
                 <tr>
@@ -44,20 +44,29 @@
                     <td><Label for="locatario_cpf">CPF do locatario:</Label></td>
 
                     <td><input type="text" maxlength="11" id="locatario_cpf" name="locatario_cpf" value='<c:out value="${aluguelDeCarro.locatario.cpf}"/>'></td>
-
-                    <td><button type="submit" name="botao" value="PesquisarLocatarioCpf">Pesquisar</button></td> <!--PesquisarLocatarioCpf-->
                 </tr>
 
                 <tr>
                     <td><Label for="data_retirada">Dia de retirada:</Label></td>
 
-                    <td><input type="date" id="data_retirada" name="data_retirada" value='<c:out value="${aluguelDeCarro.locatario.dataRetirada}"/>'></td>
+                    <td><input type="date" id="data_retirada" name="data_retirada" value='<c:out value="${aluguelDeCarro.dataRetirada}"/>'></td>
                 </tr>
 
                 <tr>
                     <td><Label for="data_devolucao">Dia de devolução:</Label></td>
 
-                    <td><input type="date" id="data_devolucao" name="data_devolucao" value='<c:out value="${aluguelDeCarro.locatario.dataDevolucao}"/>'></td>
+                    <td><input type="date" id="data_devolucao" name="data_devolucao" value='<c:out value="${aluguelDeCarro.dataDevolucao}"/>'></td>
+                </tr>
+
+                <tr>
+                    <td><button type="submit" name="botao" value="Adicionar">Adicionar
+                    <img src="" alt="icone">
+                    </button></td>  <!-- Adicionar -->
+                    
+                    <td><button type="submit" name="botao" value="Listar">Listar
+                    <img src="" alt="icone">
+                    </button></td>  <!-- Listar -->
+
                 </tr>
             </table>
         </form>
@@ -110,11 +119,44 @@
                             <td>${carro.categoria.nome}</td>
 
                             <td colspan="4">
-                                <a class="a_link_clicavel" href="${pageContext.request.contextPath }/cadastrar_carro?acao=selecionar&id=${carro.placa}">Selecionar</a>
+                                <a class="a_link_clicavel" href="${pageContext.request.contextPath }/cadastrar_aluguel_de_carro?acao=selecionar&id=${carro.placa}">Selecionar</a>
                             </td> <!-- selecionar -->
                         </tr>
                         <tr><td colspan="6"><hr></td></tr>
                     </c:forEach>
+                </table>
+            </c:if>
+        </section>
+
+        <section>
+            <c:if test="${not empty aluguelDeCarros}">
+                <table>
+                    <thead>
+                        <th>ID:</th>
+                        <th>Placa do Carro Alugado:</th>
+                        <th>CPF do Locatario:</th>
+                        <th>Dia da Retirada:</th>
+                        <th>Dia da Devolução:</th>
+                        <th>Dias Alugados:</th>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="aluguelDeCarros" items="${aluguelDeCarros}">
+                            <tr>
+                                <td>${aluguelDeCarros.id}</td>
+                                <td>${aluguelDeCarros.carro.placa}</td>
+                                <td>${aluguelDeCarros.locatario.cpf}</td>
+                                <td>${aluguelDeCarros.dataRetirada}</td>
+                                <td>${aluguelDeCarros.dataDevolucao}</td>
+                                <td>${aluguelDeCarros.quantDiasAlugado}</td>
+                                <td colspan="2">
+                                    <a class="a_link_clicavel"
+									href="${pageContext.request.contextPath }/cadastrar_aluguel_de_carro?acao=editar&id=${aluguelDeCarros.id}">Editar</a>
+                                    <a class="a_link_clicavel"
+									href="${pageContext.request.contextPath }/cadastrar_aluguel_de_carro?acao=excluir&id=${aluguelDeCarros.id}">Deletar</a>
+                                </td> <!-- editar | excluir -->
+                            </tr>
+                        </c:forEach>
+                    </tbody>
                 </table>
             </c:if>
         </section>

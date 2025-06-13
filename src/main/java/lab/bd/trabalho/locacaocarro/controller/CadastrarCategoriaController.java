@@ -96,15 +96,6 @@ public class CadastrarCategoriaController {
 				}
 			}
 
-			// Botao "Remover"
-			if (cmd.equalsIgnoreCase("Remover")) {
-				if (id != null) {
-					categoriaR.deleteById(id);
-					saida = "Categoria deletada com sucesso";
-				} else {
-					erro = "Nao foi possivel deletar a Categoria";
-				}
-			}
 
 		} catch (Exception e) {
 			if (e.getMessage().contains("FKlv7k099l7ifx0nstivv52f9xm")) {

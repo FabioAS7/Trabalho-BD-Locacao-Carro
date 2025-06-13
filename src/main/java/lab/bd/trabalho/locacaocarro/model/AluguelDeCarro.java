@@ -1,6 +1,7 @@
 package lab.bd.trabalho.locacaocarro.model;
 
 import java.time.LocalDate;
+import org.hibernate.annotations.Formula;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -44,4 +45,9 @@ public class AluguelDeCarro {
 	@Column(name = "data_devolucao", nullable = false)
 	private LocalDate dataDevolucao;
 	
+
+	//Nao vai pro banco de dados esse atributo
+	@Formula("DATEDIFF(DAY, data_retirada, data_devolucao)")
+	private int quantDiasAlugado;
+
 }

@@ -35,7 +35,7 @@ public class CadastrarLocatarioController {
 		Locatario locatario = new Locatario();
 		Endereco endereco = new Endereco();
 		List<Endereco> enderecos = new ArrayList<Endereco>();
-		
+
 		if (params.get("idE") != null && !params.get("idE").isEmpty()) {
 			id = Integer.parseInt(params.get("idE"));
 		}
@@ -54,16 +54,16 @@ public class CadastrarLocatarioController {
 					locatarioR.deleteById(cpf);
 					saida = "Locatario (Nome: " + locatario.getNome() + ") deletado com sucesso";
 					locatario = null;
-					
+
 				}
 			}
 
 			if (params.get("idE") != null && !params.get("idE").isEmpty()) { // ID Endereco
-				
+
 				if (acao.equalsIgnoreCase("editar")) {
 					endereco = enderecoR.getReferenceById(id);
 					locatario = locatarioR.getReferenceById(endereco.getLocatario().getCpf());
-					
+
 				} else if (acao.equalsIgnoreCase("excluir")) {
 					endereco = enderecoR.getReferenceById(id);
 					enderecoR.deleteById(id);
@@ -75,7 +75,7 @@ public class CadastrarLocatarioController {
 		} catch (Exception e) {
 			erro = e.getMessage();
 		}
-		
+
 		model.addAttribute("erro", erro);
 		model.addAttribute("saida", saida);
 		model.addAttribute("locatario", locatario);
@@ -100,10 +100,15 @@ public class CadastrarLocatarioController {
 		String cmd = params.get("botao");
 		String saida = "";
 		String erro = "";
+		boolean existente = false;
 
 		Locatario locatario = new Locatario();
 		Endereco endereco = new Endereco();
 		List<Locatario> locatarios = new ArrayList<Locatario>();
+
+		if (params.get("idE") != null && !params.get("idE").isEmpty()) {
+			id_endereco = Integer.parseInt(params.get("idE"));
+		}
 
 		try {
 			// Botao "Listar"
@@ -113,12 +118,19 @@ public class CadastrarLocatarioController {
 
 			// Botao "Adicionar"
 			if (cmd.equalsIgnoreCase("Adicionar")) {
+				existente = locatarioR.findById(cpf).isPresent();
 				locatario.setCpf(cpf);
 				locatario.setNome(nome);
 				locatario.setNumHabilitacao(numHabilitacao);
 				locatario.setDataNascimento(LocalDate.parse(dataNascimento));
 
-				endereco.setId(id_endereco);
+				if (id_endereco != null) {
+					endereco = enderecoR.findById(id_endereco).orElse(new Endereco());
+					endereco.setId(id_endereco);
+				} else {
+					endereco = new Endereco();
+				}
+
 				endereco.setLougradouroEndereco(lougradouroEndereco);
 				endereco.setLougradouroNum(lougradouroNum);
 				endereco.setLougradouroCep(lougradouroCep);
@@ -128,7 +140,7 @@ public class CadastrarLocatarioController {
 				locatarioR.save(locatario);
 				enderecoR.save(endereco);
 
-				if (locatarioR.findById(cpf).isPresent()) {
+				if (existente) {
 					saida = "Locatario (CPF: " + cpf + ") atualizado com sucesso";
 				} else {
 					saida = "Locatario adicionado com sucesso";
@@ -137,13 +149,21 @@ public class CadastrarLocatarioController {
 
 			// Botao "Remover"
 			if (cmd.equalsIgnoreCase("Remover")) {
-				enderecoR.deleteAllLocatario(cpf);
-				saida = "Locatario deletado com sucesso";
+				if(cpf != null && cpf.isEmpty() && cpf.isBlank()) {
+					enderecoR.deleteAllLocatario(cpf);
+					locatarioR.deleteById(cpf);
+					saida = "Locatario deletado com sucesso";
+				} else {
+					erro = "Não foi possivel deletar o Locatario";
+				}
 			}
 
 		} catch (Exception e) {
-			erro = e.getMessage();
-
+			if(e.getMessage().contains("Text '' could not be parsed")) {
+				erro = "Todos os campos devem serem preenchidos";
+			} else {
+				erro = e.getMessage();
+			}
 		}
 
 		model.addAttribute("erro", erro);

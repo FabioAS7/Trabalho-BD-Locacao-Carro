@@ -99,6 +99,7 @@ public class CadastrarCarroController {
 		String cmd = params.get("botao");
 		String saida = "";
 		String erro = "";
+		boolean existente = false;
 		Carro carro = new Carro();
 		List<Carro> carros = new ArrayList<Carro>();
 		List<Categoria> categorias = new ArrayList<Categoria>();
@@ -151,6 +152,7 @@ public class CadastrarCarroController {
 
 			// Botao "Adicionar"
 			if (cmd.equalsIgnoreCase("Adicionar")) {
+				existente = carroR.findById(placa).isPresent();
 				carro.setPlaca(placa);
 				carro.setMarca(marca);
 				carro.setModelo(modelo);
@@ -165,12 +167,12 @@ public class CadastrarCarroController {
 				carro.setCategoria(c);
 				carroR.save(carro);
 
-				if (carroR.findById(placa).isPresent()) {
+				if (existente) {
 					saida = "Carro (" + placa + ") atualizado com sucesso";
 				} else {
 					saida = "Carro adicionado a frota com sucesso";
 				}
-
+				
 			}
 
 			// Botao "Remover"

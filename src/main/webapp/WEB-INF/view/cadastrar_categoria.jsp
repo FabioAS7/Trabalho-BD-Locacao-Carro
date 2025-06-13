@@ -53,9 +53,6 @@
                     <img src="" alt="icone">
                     </button></td>  <!-- Listar -->
 
-                    <td><button type="submit" name="botao" value="Remover">Remover
-                    <img src="" alt="icone">
-                    </button></td>  <!-- Remover -->
                 </tr>
 
             </table>

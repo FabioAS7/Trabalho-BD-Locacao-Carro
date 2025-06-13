@@ -53,7 +53,7 @@
             <hr>
             
             <table>
-                <input type="hidden" name="id_endereco" value="${endereço.id}">
+                <input type="hidden" name="idE" value="${endereco.id}">
                 <tr>
                     <td><Label for="logradouro_endereco">Endereço locatario:</Label></td>
                     <td><input type="text" id="logradouro_endereco" name="logradouro_endereco" maxlength="100" value='<c:out value="${endereco.lougradouroEndereco}"/>'></td>
@@ -61,7 +61,7 @@
 
                 <tr>
                     <td><Label for="logradouro_num">Número do Endereço:</Label></td>
-                    <td><input type="text" id="logradouro_num" name="logradouro_num" maxlength="10" value='<c:out value="${endereco.lougradouroNum}"/>'></td>
+                    <td><input type="text" id="logradouro_num" name="logradouro_num" maxlength="4" value='<c:out value="${endereco.lougradouroNum}"/>'></td>
                 </tr>
 
                 <tr>
