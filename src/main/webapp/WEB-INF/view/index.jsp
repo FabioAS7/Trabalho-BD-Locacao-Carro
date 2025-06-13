@@ -25,5 +25,16 @@
 
     <p>ESSE É O INDEX</p>
     <P>Angelo seu vacilão</P>
+    
+    <h1>NOSSO COMERCIAL</h1>
+    <video controls width="300">
+        <source src="./assets/Big Bill Hale Car Dealership Gag TV Commercial.mp4">
+    </video>
+    <br>
+    <audio preload="metadata" autoplay controls loop>
+        <source src="./assets//Chola mais daqui não dá pra te ouvir.mp3" type="audio/mpeg">
+    </audio>
+    
+    
 </body>
 </html>
