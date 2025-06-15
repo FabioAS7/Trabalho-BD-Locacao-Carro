@@ -30,12 +30,40 @@
 		</nav>
 	</header>
 
-	<h1>INDEX :)</h1>
+	<main>
+		<h1>INDEX :)</h1>
+		<audio preload="metadata" autoplay controls loop
+			style="display: none;">
+			<source src="./assets/carro.mp3" type="audio/mpeg">
+		</audio>
 
+	</main>
 
-	<audio preload="metadata" autoplay controls loop style="display: none;">
-		<source src="./assets/carro.mp3" type="audio/mpeg">
-	</audio>
+	<footer>
+		<p>
+			Desenvolvido por <a href="https://github.com/AnGeloMuniZZZ"
+				target="_blank">Angelo</a> & <a href="https://github.com/FabioAS7"
+				target="_blank">Fábio</a>
+		</p>
+		<p>|</p>
+		<p>
+			<a
+				href="${pageContext.request.contextPath}/politicadeprivacidade.html"
+				target="_blank">Política de Privacidade</a>
+		</p>
+		<p>|</p>
+		<p>
+			<a href="${pageContext.request.contextPath}/termosecondicoes.html">Termos
+				e Condições</a>
+		</p>
+		<p>|</p>
+		<p>
+			<a href="${pageContext.request.contextPath}/maven-site/index.html"
+				target="_blank">Sobre este site (MavenSite<img
+				src="./assets/maven.ico" alt="Maven_icone">)
+			</a>
+		</p>
+	</footer>
 
 
 </body>
