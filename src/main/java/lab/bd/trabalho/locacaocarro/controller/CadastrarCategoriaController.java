@@ -98,10 +98,14 @@ public class CadastrarCategoriaController {
 
 
 		} catch (Exception e) {
-			if (e.getMessage().contains("FKlv7k099l7ifx0nstivv52f9xm")) {
-				erro = "Nao e possivel deletar a categoria: existem carros vinculados a ela";
+			if(e.getMessage()!=null) {
+				if (e.getMessage().contains("FKlv7k099l7ifx0nstivv52f9xm")) {
+					erro = "Nao e possivel deletar a categoria: existem carros vinculados a ela";
+				} else {
+					erro = e.getMessage();
+				}
 			} else {
-				erro = e.getMessage();
+				erro = "Erro desconhecido ao processar a categoria";
 			}
 		}
 

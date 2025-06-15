@@ -1,20 +1,94 @@
 @charset "UTF-8";
 
-/*Estilo da parte*/
-.tabela_de_entrada_de_dados{
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+main {
+    flex: 1;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+form > table{
+    padding: 2px 0px;
+
 }
 
 
-/*Estilo da tabela de pesquisa de carros*/
+button{
+    border-radius: 5px;
+    background-color: #D4C5C7;
+    font-size: 13pt;
+    color: black;
+}
+button:hover{
+    background-color: #f3e9eb;
+}
+
+
+/*Estilo do SUPER MEGA BLAST filtro*/
+.superfiltro{
+    border: 1px solid #BFB5AF;
+    border-radius: 5px;
+}
+
+.oculta{
+    display: none;
+}
+
+
+
+/*Estilo da Tabelas de pesquisa de carros*/
 .tabela_de_pesquisa_carro{
+    border-radius: 50px;
     border-collapse: collapse;
     width: 100%;
 }
 .tabela_de_pesquisa_carro td,
 .tabela_de_pesquisa_carro th{
-    border: 1px solid black;
+    border: 1px solid #BFB5AF;
     padding: 8px;
 }
 .cabecalho_carro{
-    background-color: beige;
+    background-color: #D5B9B2;
+    color: black;
+}
+
+
+
+/*Estilo das outras Tabelas*/
+.tabela_de_apesentacao {
+    border: 2px solid #BFB5AF;
+    padding: 16px;
+    border-radius: 8px;
+    margin: 20px 0;
+    background-color: #202022;
+}
+
+.tabela_de_apesentacao thead {
+    background-color: #1f1f22;
+}
+
+
+
+
+/*Editar, Deletar, Selecionar*/
+.a_link_clicavel {
+    color: #a1c9ff;
+    text-decoration: none;
+    margin-right: 8px;
+}
+
+.a_link_clicavel:hover {
+    text-decoration: underline;
+    color: #6090d7;
+}
+
+.h2_mensagem_VALIDACAO{
+    color: #95EC96;
+}
+.h2_mensagem_ERRO{
+    color: #FF4246;
 }

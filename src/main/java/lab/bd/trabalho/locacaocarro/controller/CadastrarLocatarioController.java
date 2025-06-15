@@ -149,7 +149,7 @@ public class CadastrarLocatarioController {
 
 			// Botao "Remover"
 			if (cmd.equalsIgnoreCase("Remover")) {
-				if(cpf != null && cpf.isEmpty() && cpf.isBlank()) {
+				if(cpf != null && !cpf.isBlank() && !cpf.isEmpty()) {
 					enderecoR.deleteAllLocatario(cpf);
 					locatarioR.deleteById(cpf);
 					saida = "Locatario deletado com sucesso";

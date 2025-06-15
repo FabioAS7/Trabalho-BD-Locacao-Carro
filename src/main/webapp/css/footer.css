@@ -2,7 +2,7 @@
 
 footer{
     height: auto;
-    background-color: #00122D;
+    background-color: #1a1a1b;
     text-align: center;
     color: #EFFFFF;
     width: 100%;
@@ -20,5 +20,6 @@ footer p > a{
 }
 
 footer p > a:hover{
+    color: #6090d7;
     text-decoration: underline;
 }

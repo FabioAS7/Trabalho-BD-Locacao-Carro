@@ -65,6 +65,14 @@ public class CadastrarCarroController {
 
 			if (e.getMessage().contains("FK74srjkqum99t03ftfoj5v425r")) {
 				erro = "O carro esta sendo referenciado na tabela de carros alugados";
+			} else if (e.getMessage().contains("truncados na tabela")) {
+				erro = "Um ou mais campos ultrapassaram o tamanho permitido";
+			} else if (e.getMessage().contains("FK74srjkqum99t03ftfoj5v425r")) {
+				erro = "O carro esta sendo referenciado na tabela de carros alugados";
+			} else if (e.getMessage().contains("\"filtro\" is null")) {
+				erro = "Informe um dado valido para realizar a filtragem";
+			} else if (e.getMessage().contains("Text '' could not be parsed at index 0")) {
+				erro = "Todos os campos devem ser preenchidos";
 			} else {
 				erro = e.getMessage();
 			}
@@ -172,21 +180,32 @@ public class CadastrarCarroController {
 				} else {
 					saida = "Carro adicionado a frota com sucesso";
 				}
-				
+
 			}
 
 			// Botao "Remover"
 			if (cmd.equalsIgnoreCase("Remover")) {
-				carroR.deleteById(placa);
-				saida = "Carro deletado com sucesso";
+				if (placa != null && !placa.isBlank() && !placa.isEmpty()) {
+					carroR.deleteById(placa);
+					saida = "Carro deletado com sucesso";
+				} else {
+					erro = "Nao foi possivel remover o Carro";
+				}
+				
 			}
 
 		} catch (Exception e) {
 
-			if (e.getMessage().contains("truncados na tabela")) {
+			if (e.getMessage().contains("FK74srjkqum99t03ftfoj5v425r")) {
+				erro = "O carro esta sendo referenciado na tabela de carros alugados";
+			} else if (e.getMessage().contains("truncados na tabela")) {
 				erro = "Um ou mais campos ultrapassaram o tamanho permitido";
 			} else if (e.getMessage().contains("FK74srjkqum99t03ftfoj5v425r")) {
 				erro = "O carro esta sendo referenciado na tabela de carros alugados";
+			} else if (e.getMessage().contains("\"filtro\" is null")) {
+				erro = "Informe um dado valido para realizar a filtragem";
+			} else if (e.getMessage().contains("Text '' could not be parsed at index 0")) {
+				erro = "Todos os campos devem ser preenchidos";
 			} else {
 				erro = e.getMessage();
 			}

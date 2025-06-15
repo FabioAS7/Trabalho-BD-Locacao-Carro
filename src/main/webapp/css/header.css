@@ -1,1 +1,64 @@
 @charset "UTF-8";
+
+body{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12pt;
+    background-color: #2d2f34;
+    color: white;
+}
+
+header{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 5px 15px;
+    background-color: #202022;
+}
+
+header> nav> li, a{
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+}
+
+.logotipo{
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    margin-right: auto;
+}
+
+.logotipo > a{
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    margin-right: auto;
+}
+
+.links_de_navegacao{
+    list-style: none;
+}
+
+.links_de_navegacao li{
+    display: inline-block;
+    padding: 0 20px;
+}
+
+.links_de_navegacao li a:hover{
+    color: #6090d7;
+}
+
+
+@media (max-width: 800px){
+    header> li, a{
+        font-size: 12px;
+    }
+
+    .logotipo{
+        font-size: 22px;
+    }
+}
