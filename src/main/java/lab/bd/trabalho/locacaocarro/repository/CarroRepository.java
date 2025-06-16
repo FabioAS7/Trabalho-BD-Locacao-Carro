@@ -1,9 +1,10 @@
 package lab.bd.trabalho.locacaocarro.repository;
 
-import java.time.LocalDate;
 import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+
 import lab.bd.trabalho.locacaocarro.model.Carro;
 
 public interface CarroRepository extends JpaRepository<Carro, String>{
@@ -16,7 +17,7 @@ public interface CarroRepository extends JpaRepository<Carro, String>{
 	
 	public List<Carro> findByCor(String cor);
 	
-	public List<Carro> findByAno(LocalDate ano);
+	public List<Carro> findByAno(Integer ano);
 	
 	public List<Carro> findByTipoCombustivel(String tipoCombustivel);
 	
@@ -26,5 +27,8 @@ public interface CarroRepository extends JpaRepository<Carro, String>{
 	
 	@Query(value = "SELECT c FROM Carro c WHERE c.categoria.nome LIKE ?1")
 	public List<Carro> findCarroCategoria(String categoria);
+	
+	@Query(value = "SELECT * FROM func_carros_disponiveis()", nativeQuery = true)
+	public List<Carro> findCarroDisponiveis();
 
 }

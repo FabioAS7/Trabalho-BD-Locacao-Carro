@@ -5,6 +5,7 @@ function filtros(){
 	const status = document.getElementById("filtroStatus");
 	const txt = document.getElementById("filtroTexto");
 	const cate = document.getElementById("filtroCat");
+
 	if(filtro1.value === "TipoCombustivel"){
 		comb.style.display = "block";
 		txt.style.display = "none";
@@ -35,6 +36,6 @@ function filtros(){
 		camb.style.display = "none";
 		status.style.display = "none";
 		cate.style.display = "none";
-		
 	}
+
 }

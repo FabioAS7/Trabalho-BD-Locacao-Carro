@@ -1,27 +1,14 @@
-/*
+
 CREATE DATABASE aluguel_carros
 GO
 USE aluguel_carros
-GO
 
-
-USE master
-GO
-DROP DATABASE aluguel_carros
-
-DROP TABLE aluguel_de_carro;
-DROP TABLE reparo;
-DROP TABLE locatario;
-DROP TABLE carro;
-DROP TABLE categoria;
-DROP TABLE endereco;
-GO
-*/
 GO
 
 -------------------------------------------------------------------------- CRIACAO/INSERCAO DAS TABLEs --------------------------------------------------------------------------- 
+/*
 INSERT INTO categoria (nome, valor_diaria) VALUES
-('Econômico', 89.90),
+('Economico', 89.90),
 ('SUV', 159.90),
 ('Sedan', 129.50),
 ('Luxo', 299.99),
@@ -37,7 +24,7 @@ INSERT INTO carro (placa, ano, cor, km_rodados, litros_combustivel, marca, model
 GO
 
 INSERT INTO locatario (cpf, data_nascimento, nome, num_habilitacao) VALUES
-('12345678901', '1990-04-15', 'João Silva', 'ABC12345678'),
+('12345678901', '1990-04-15', 'Joao Silva', 'ABC12345678'),
 ('23456789012', '1985-08-22', 'Maria Oliveira', 'DEF98765432'),
 ('34567890123', '2000-01-30', 'Pedro Santos', 'GHI54321678'),
 ('45678901234', '1995-12-12', 'Ana Paula', 'JKL78945612'),
@@ -53,13 +40,13 @@ INSERT INTO aluguel_de_carro (data_devolucao, data_retirada, carro_placa, locata
 GO
 
 INSERT INTO reparo (descricao_problema, dia_entrada, quant_dias_reparo, valor_reparo, carro_placa) VALUES
-('Troca de óleo e revisão geral', '2025-05-10', 2, 250.00, 'JKL3456'),
-('Substituição de pneus dianteiros', '2025-05-20', 1, 480.00, 'ABC1234'),
+('Troca de oleo e revisao geral', '2025-05-10', 2, 250.00, 'JKL3456'),
+('Substituicao de pneus dianteiros', '2025-05-20', 1, 480.00, 'ABC1234'),
 ('Reparo no sistema de freios', '2025-05-25', 3, 620.00, 'GHI9012'),
 ('Alinhamento e balanceamento', '2025-06-01', 1, 150.00, 'DEF5678'),
 ('Troca do filtro de ar e limpeza', '2025-06-03', 1, 90.00, 'MNO7890')
 GO
-
+*/
 
 
 
@@ -119,79 +106,7 @@ BEGIN
 END
 GO
 
--- FUNCAO que retorna um relatorio sobre um aluguel em um dia especifico
 /*
-RELATORIO GERAL? do carro?
-Deve-se poder gerar um relatório em PDF com os dados do veículo, além do nome, 
-do CPF do locatário e a quantidade de dias fora dos carros alugados no dia. 
-*/
-CREATE FUNCTION func_relatorio_alugados_do_dia(@dia_pesquisa_inicial DATE) RETURNS @relatorio_do_dia TABLE(
-nome VARCHAR(90) NOT NULL,
-cpf CHAR(11) NOT NULL,
-
-placa CHAR(8) NOT NULL,
-marca VARCHAR(100) NOT NULL,
-modelo VARCHAR(100) NOT NULL,
-cor VARCHAR(80) NOT NULL,
-ano DATE NOT NULL,
-tipo_combustivel VARCHAR(80) NOT NULL,
-litros_combustivel DECIMAL(5,2) NOT NULL,
-km_rodados DECIMAL(10,1) NOT NULL,
-tipo_cambio VARCHAR(50) NOT NULL,
-status_carro VARCHAR(50) NOT NULL,
-categoria_id INT NOT NULL,
-
-status_aluguel VARCHAR(50) NOT NULL
-) AS 
-BEGIN
-	
-	DECLARE @id AS INT
-	DECLARE @carro_placa AS CHAR(8)
-	DECLARE @locatario_cpf AS CHAR(11)
-	DECLARE @data_retirada DATE
-
-	DECLARE c CURSOR
-	FOR SELECT id, carro_placa, locatario_cpf, data_retirada FROM aluguel_de_carro
-	OPEN c
-
-	FETCH NEXT FROM c INTO @id, @carro_placa, @locatario_cpf, @data_retirada
-
-	WHILE @@FETCH_STATUS = 0 BEGIN
-		
-		IF(@dia_pesquisa_inicial = @data_retirada) BEGIN
-			
-			INSERT INTO @relatorio_do_dia VALUES(
-			(SELECT nome FROM locatario WHERE cpf = @locatario_cpf),
-			@locatario_cpf,
-
-			@carro_placa,
-			(SELECT marca FROM carro WHERE placa = @carro_placa),
-			(SELECT modelo FROM carro WHERE placa = @carro_placa),
-			(SELECT cor FROM carro WHERE placa = @carro_placa),
-			(SELECT ano FROM carro WHERE placa = @carro_placa),
-			(SELECT tipo_combustivel FROM carro WHERE placa = @carro_placa),
-			(SELECT litros_combustivel FROM carro WHERE placa = @carro_placa),
-			(SELECT km_rodados FROM carro WHERE placa = @carro_placa),
-			(SELECT tipo_cambio FROM carro WHERE placa = @carro_placa),
-			(SELECT status_carro FROM carro WHERE placa = @carro_placa),
-			(SELECT categoria_id FROM carro WHERE placa = @carro_placa),
-
-			(SELECT status_aluguel FROM aluguel_de_carro WHERE id = @id)
-			)
-
-		END
-
-		FETCH NEXT FROM c INTO @id, @carro_placa, @locatario_cpf, @data_retirada
-	END
-
-	CLOSE c
-    DEALLOCATE c
-    RETURN
-END
-GO
-
-
-
 CREATE TRIGGER trig_status_reparo ON reparo
 FOR INSERT, UPDATE, DELETE AS
 BEGIN	
@@ -259,13 +174,11 @@ BEGIN
 END
 GO
 
-
-
 SELECT * FROM categoria
 SELECT * FROM carro
 SELECT * FROM reparo
 SELECT * FROM locatario
 SELECT * FROM aluguel_de_carro
-
 SELECT * FROM func_carros_disponiveis()
 GO
+*/

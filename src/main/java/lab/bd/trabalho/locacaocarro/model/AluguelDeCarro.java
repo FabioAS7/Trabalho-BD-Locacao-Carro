@@ -45,7 +45,6 @@ public class AluguelDeCarro {
 	@Column(name = "data_devolucao", nullable = false)
 	private LocalDate dataDevolucao;
 	
-
 	//Nao vai pro banco de dados esse atributo
 	@Formula("DATEDIFF(DAY, data_retirada, data_devolucao)")
 	private int quantDiasAlugado;

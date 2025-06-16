@@ -1,6 +1,10 @@
 package lab.bd.trabalho.locacaocarro.controller;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -8,14 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 import lab.bd.trabalho.locacaocarro.model.Carro;
 import lab.bd.trabalho.locacaocarro.model.Categoria;
 import lab.bd.trabalho.locacaocarro.repository.CarroRepository;
 import lab.bd.trabalho.locacaocarro.repository.CategoriaRepository;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class CadastrarCarroController {
@@ -139,7 +140,7 @@ public class CadastrarCarroController {
 					carros = carroR.findByCor(txtFiltro);
 					break;
 				case ("Ano"):
-					carros = carroR.findByAno(LocalDate.parse(txtFiltro));
+					carros = carroR.findByAno(Integer.parseInt(txtFiltro));
 					break;
 				case ("TipoCombustivel"):
 					carros = carroR.findByTipoCombustivel(txtFiltro1);
@@ -165,7 +166,7 @@ public class CadastrarCarroController {
 				carro.setMarca(marca);
 				carro.setModelo(modelo);
 				carro.setCor(cor);
-				carro.setAno(LocalDate.parse(ano));
+				carro.setAno(Integer.parseInt(ano));
 				carro.setTipoCombustivel(tipoCombustivel);
 				carro.setLitrosCombustivel(new BigDecimal(litrosCombustivel));
 				carro.setKmRodados(new BigDecimal(kmRodados));
@@ -191,7 +192,7 @@ public class CadastrarCarroController {
 				} else {
 					erro = "Nao foi possivel remover o Carro";
 				}
-				
+
 			}
 
 		} catch (Exception e) {

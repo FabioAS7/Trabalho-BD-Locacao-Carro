@@ -1,7 +1,7 @@
 package lab.bd.trabalho.locacaocarro.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -38,7 +38,7 @@ public class Carro {
 	private String cor;
 	
 	@Column(name = "ano", nullable = false)
-	private LocalDate ano;
+	private Integer ano;
 	
 	@Column(name = "tipo_combustivel", length = 80, nullable = false)
 	private String tipoCombustivel;

@@ -1,9 +1,10 @@
 package lab.bd.trabalho.locacaocarro.controller;
 
-import java.util.Map;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 import lab.bd.trabalho.locacaocarro.model.AluguelDeCarro;
 import lab.bd.trabalho.locacaocarro.model.Carro;
-import lab.bd.trabalho.locacaocarro.model.Endereco;
 import lab.bd.trabalho.locacaocarro.repository.AluguelDeCarroRepository;
 import lab.bd.trabalho.locacaocarro.repository.CarroRepository;
 import lab.bd.trabalho.locacaocarro.repository.LocatarioRepository;
@@ -109,7 +110,7 @@ public class CadastrarAluguelDeCarroController {
 			if (cmd.equalsIgnoreCase("Listar")) {
 				aluguelDeCarros = aluguelDeCarroR.findAll();
 			} else if (cmd.equalsIgnoreCase("PesquisarCarroPlaca")) {
-				carros = carroR.findAll();
+				carros = carroR.findCarroDisponiveis();
 			}
 
 			// Botao "Adicionar"

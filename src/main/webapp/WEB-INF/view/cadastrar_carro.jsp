@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="./css/header.css">
 <link rel="stylesheet" href="./css/main.css">
 <link rel="stylesheet" href="./css/footer.css">
+<link rel="stylesheet" href="./css/filtro.css">
 <script src="./js/filtro.js"></script>
 </head>
 <body>
@@ -98,8 +99,7 @@
 							</c:forEach>
 					</select></td>
 
-					<td><input type="text" id="filtroTexto" name="filtroTexto"
-						placeholder="Digite aqui o filtro"></td>
+					<td><input type="text" class="oculta" id="filtroTexto" name="filtroTexto" placeholder="Digite aqui o filtro"></td>
 					<td><button type="submit" name="botao" value="Filtrar">
 							Filtrar <img src="./assets/filtro.ico" alt="icone">
 						</button></td>
@@ -137,7 +137,7 @@
 
 				<tr>
 					<td><Label for="ano">Ano:</Label></td>
-					<td><input type="date" id="ano" name="ano"
+					<td><input type="number" id="ano" name="ano" min="1500" max="2030"
 						value='<c:out value="${carro.ano}"/>'></td>
 				</tr>
 
@@ -219,10 +219,7 @@
 						<label for="status_alugado">Alugado</label> <input type="radio"
 						id="status_reparo" name="status_carro" value="Em Reparo"
 						<c:if test="${carro.statusCarro == 'Em Reparo'}">checked</c:if>>
-						<label for="status_reparo">Em Reparo</label> <input type="radio"
-						id="status_inativo" name="status_carro" value="Inativo"
-						<c:if test="${carro.statusCarro == 'Inativo'}">checked</c:if>>
-						<label for="status_inativo">Inativo / Fora de Frota</label></td>
+						<label for="status_reparo">Em Reparo</label></td>
 				</tr>
 
 				<tr>
