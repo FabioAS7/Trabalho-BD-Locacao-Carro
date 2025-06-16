@@ -197,18 +197,23 @@ public class CadastrarCarroController {
 
 		} catch (Exception e) {
 
-			if (e.getMessage().contains("FK74srjkqum99t03ftfoj5v425r")) {
-				erro = "O carro esta sendo referenciado na tabela de carros alugados";
-			} else if (e.getMessage().contains("truncados na tabela")) {
-				erro = "Um ou mais campos ultrapassaram o tamanho permitido";
-			} else if (e.getMessage().contains("FK74srjkqum99t03ftfoj5v425r")) {
-				erro = "O carro esta sendo referenciado na tabela de carros alugados";
-			} else if (e.getMessage().contains("\"filtro\" is null")) {
-				erro = "Informe um dado valido para realizar a filtragem";
-			} else if (e.getMessage().contains("Text '' could not be parsed at index 0")) {
-				erro = "Todos os campos devem ser preenchidos";
+			if (e.getMessage() != null) {
+				if (e.getMessage().contains("FK74srjkqum99t03ftfoj5v425r")) {
+					erro = "O carro esta sendo referenciado na tabela de carros alugados";
+				} else if (e.getMessage().contains("truncados na tabela")) {
+					erro = "Um ou mais campos ultrapassaram o tamanho permitido";
+				} else if (e.getMessage().contains("FK74srjkqum99t03ftfoj5v425r")) {
+					erro = "O carro esta sendo referenciado na tabela de carros alugados";
+				} else if (e.getMessage().contains("\"filtro\" is null")) {
+					erro = "Informe um dado valido para realizar a filtragem";
+				} else if (e.getMessage().contains("Text '' could not be parsed at index 0")
+						|| e.getMessage().contains("For input string: \"")) {
+					erro = "Todos os campos devem ser preenchidos";
+				} else {
+					erro = e.getMessage();
+				}
 			} else {
-				erro = e.getMessage();
+				erro = "Erro desconhecido ao processar o carro";
 			}
 
 		}

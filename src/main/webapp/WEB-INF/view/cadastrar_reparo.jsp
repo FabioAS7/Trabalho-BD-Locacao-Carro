@@ -100,6 +100,18 @@
 
 		<hr>
 
+		<br>
+		<form action="cadastrar_reparo_relatorio" method="post" target="_blank">
+			<table>
+				<tr>
+				<td colspan="1"><label for="relatorio">Data: </label></td>
+				<td colspan="2"><input type="date" id="relatorio" name="dia"></td>
+					<td colspan="1"><input type="submit" name="botao" value="relatorio">
+					</td>
+				</tr>
+			</table>
+		</form>
+	
 		<section>
 			<c:if test="${not empty carros}">
 				<table class="tabela_de_pesquisa_carro">

@@ -119,6 +119,18 @@
 		</form>
 
 		<hr>
+		
+		<br>
+		<form action="cadastrar_locatario_relatorio" method="post" target="_blank">
+			<table>
+				<tr>
+				<td colspan="1"><label for="relatorio">CPF: </label></td>
+				<td colspan="2"><input type="text" id="relatorio" name="cpf"></td>
+					<td colspan="1"><input type="submit" name="botao" value="relatorio">
+					</td>
+				</tr>
+			</table>
+		</form>
 
 		<section>
 			<c:if test="${not empty locatarios}">
